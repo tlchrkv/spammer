@@ -1,0 +1,58 @@
+version: '3.4'
+
+x-template: &php
+    build:
+        context: .
+        dockerfile: PHP/Dockerfile
+    networks:
+        - mailing_backend
+    depends_on:
+        - mysql
+    volumes:
+        - ./../../../:/opt/app:delegated
+    env_file:
+        - .env
+
+services:
+  nginx:
+    image: nginx:1.21-alpine
+    container_name: mailing_backend_nginx
+    restart: unless-stopped
+    networks:
+      - mailing_backend
+    depends_on:
+      - php
+    volumes:
+      - ./../../../:/opt/app
+      - ./NGINX/conf.d:/etc/nginx/conf.d
+    ports:
+      - '80:80'
+
+  mysql:
+    image: mysql:8.0.17
+    container_name: mailing_backend_mysql
+    restart: unless-stopped
+    networks:
+      - mailing_backend
+    volumes:
+      - ./MySQL/data:/var/lib/mysql
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+
+  php:
+    <<: *php
+    container_name: mailing_backend_php
+
+  worker:
+    <<: *php
+    container_name: mailing_backend_worker
+    command: ./bin/mailing-worker
+    restart: always
+
+networks:
+  mailing_backend:
+    driver: "bridge"
+    driver_opts:
+      com.docker.network.driver.mtu: 1400
