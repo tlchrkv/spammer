@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Http;
+namespace SpammerApi\Infrastructure\Http;
 
 final class ApiRoute
 {
@@ -14,7 +14,7 @@ final class ApiRoute
 
     public function isCurrentRoute(): bool
     {
-        return true;
+        return $_SERVER['REQUEST_METHOD'] === $this->method && $_SERVER['REQUEST_URI'] === $this->pathExpression;
     }
 
     public function exec(): void

@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\MySQL\Repositories;
+namespace SpammerApi\Infrastructure\MySQL\Repositories;
 
-use App\Domain\Mailing\SubscriberMessage\SubscriberMessage;
-use App\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage;
+use SpammerApi\Domain\Mailing\SubscriberMessage\SubscriberMessage;
+use SpammerApi\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage;
+use SpammerApi\Infrastructure\MySQL\MySQL;
 
 final class SubscriberMessageRepository implements SubscriberMessageStorage
 {
+    public function __construct(private readonly MySQL $mysql) {}
+
     public function create(SubscriberMessage $subscriberMessage): void
     {
         // TODO: Implement create() method.

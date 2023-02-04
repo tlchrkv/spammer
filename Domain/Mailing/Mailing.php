@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Mailing;
+namespace SpammerApi\Domain\Mailing;
 
 final class Mailing
 {

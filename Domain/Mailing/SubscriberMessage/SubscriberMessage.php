@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Mailing\SubscriberMessage;
+namespace SpammerApi\Domain\Mailing\SubscriberMessage;
 
-use App\Domain\SubscriberStorage;
+use SpammerApi\Domain\SubscriberStorage;
 
 final class SubscriberMessage
 {

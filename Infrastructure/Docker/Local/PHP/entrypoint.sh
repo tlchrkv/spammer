@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-./Presentation/Console/migrate
+./migrate.sh
 php-fpm

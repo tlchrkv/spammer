@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-use App\Infrastructure\Http\ApiRoute;
-use App\Infrastructure\Http\Response;
-use App\Application\Queries\GetSubscribersQuery;
-use App\Application\Queries\GetMailingsQuery;
-use App\Application\Commands\CreateMailingDraftCommand;
-use App\Application\Commands\StartMailingCommand;
-use App\Application\Commands\StopMailingCommand;
+use SpammerApi\Infrastructure\Http\ApiRoute;
+use SpammerApi\Infrastructure\Http\Response;
+use SpammerApi\Application\Queries\GetSubscribersQuery;
+use SpammerApi\Application\Queries\GetMailingsQuery;
+use SpammerApi\Application\Commands\CreateMailingDraftCommand;
+use SpammerApi\Application\Commands\StartMailingCommand;
+use SpammerApi\Application\Commands\StopMailingCommand;
 
 return [
-    new ApiRoute('GET', '/api/subscribers', function (): Response {
+    new ApiRoute('GET', '/subscribers', function (): Response {
         /** @var GetSubscribersQuery $getSubscribersQuery */
         $getSubscribersQuery = instance(GetSubscribersQuery::class);
         $subscribers = $getSubscribersQuery($_GET['offset'] ?? 0, $_GET['length']);
 
-        return new Response(200, $subscribers);
+        return new Response(200, ['subscribers' => $subscribers]);
     }),
-    new ApiRoute('GET', '/api/mailings', function (): Response {
+    new ApiRoute('GET', '/mailings', function (): Response {
         /** @var GetMailingsQuery $getMailingsQuery */
         $getMailingsQuery = instance(GetMailingsQuery::class);
         $mailings = $getMailingsQuery();
 
-        return new Response(200, $mailings);
+        return new Response(200, ['mailings' => $mailings]);
     }),
-    new ApiRoute('POST', '/api/create-mailing', function (): Response {
+    new ApiRoute('POST', '/create-mailing', function (): Response {
         $id = uuid4();
 
         /** @var CreateMailingDraftCommand $createMailingDraftCommand */
@@ -39,14 +39,14 @@ return [
 
         return new Response(201, ['id' => $id]);
     }),
-    new ApiRoute('PATCH', '/api/start-mailing', function (): Response {
+    new ApiRoute('PATCH', '/start-mailing', function (): Response {
         /** @var StartMailingCommand $startMailingCommand */
         $startMailingCommand = instance(StartMailingCommand::class);
         $startMailingCommand($_POST['mailing_id']);
 
         return new Response(204, []);
     }),
-    new ApiRoute('PATCH', '/api/stop-mailing', function (): Response {
+    new ApiRoute('PATCH', '/stop-mailing', function (): Response {
         /** @var StopMailingCommand $stopMailingCommand */
         $stopMailingCommand = instance(StopMailingCommand::class);
         $stopMailingCommand($_POST['mailing_id']);

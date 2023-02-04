@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Mailing\SubscriberMessage;
+namespace SpammerApi\Domain\Mailing\SubscriberMessage;
 
 enum Status
 {

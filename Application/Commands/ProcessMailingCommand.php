@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Commands;
+namespace SpammerApi\Application\Commands;
 
-use App\Domain\Mailing\MailingStorage;
-use App\Domain\Mailing\SubscriberMessage\MessageSender;
-use App\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage;
-use App\Domain\SubscriberStorage;
+use SpammerApi\Domain\Mailing\MailingStorage;
+use SpammerApi\Domain\Mailing\SubscriberMessage\MessageSender;
+use SpammerApi\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage;
+use SpammerApi\Domain\SubscriberStorage;
 
 final class ProcessMailingCommand
 {

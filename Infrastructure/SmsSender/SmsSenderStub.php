@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\SmsSender;
+namespace SpammerApi\Infrastructure\SmsSender;
 
-use App\Domain\Mailing\SubscriberMessage\MessageSender;
+use SpammerApi\Domain\Mailing\SubscriberMessage\MessageSender;
 
 final class SmsSenderStub implements MessageSender
 {

@@ -16,20 +16,34 @@ function instance(string $class): object {
 
     $constructor = $reflector->getConstructor();
 
-    if (is_null($constructor)) {
+    if ($constructor === null) {
         return new $class;
     }
 
     $parameters = $constructor->getParameters();
     $dependencies = [];
     foreach ($parameters as $parameter) {
-        $dependencyClass = $parameter->getDeclaringClass();
+        $dependencyClass = $parameter->getType()->getName();
 
-        if (is_null($dependencyClass)) {
-            throw new ReflectionException("Cannot resolve dependencies for class [$class]!?");
+        if ($dependencyClass === null) {
+            throw new ReflectionException("Cannot resolve dependencies for class [$class]!");
         }
 
-        $dependencies[] = $bindings[$class];
+        if (method_exists($dependencyClass, 'instance')) {
+            $dependencies[] = $dependencyClass::instance();
+            continue;
+        }
+
+        if ($bindings[$dependencyClass] === null) {
+            throw new ReflectionException("Has no declared binding for class [$dependencyClass]!");
+        }
+
+        if (is_callable($bindings[$dependencyClass])) {
+            $dependencies[] = $bindings[$dependencyClass]();
+            continue;
+        }
+
+        $dependencies[] = instance($bindings[$dependencyClass]);
     }
 
     return $reflector->newInstanceArgs($dependencies);

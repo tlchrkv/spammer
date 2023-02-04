@@ -5,7 +5,7 @@ x-template: &php
         context: .
         dockerfile: PHP/Dockerfile
     networks:
-        - mailing_backend
+        - spammer
     depends_on:
         - mysql
     volumes:
@@ -16,10 +16,10 @@ x-template: &php
 services:
   nginx:
     image: nginx:1.21-alpine
-    container_name: mailing_backend_nginx
+    container_name: spammer_nginx
     restart: unless-stopped
     networks:
-      - mailing_backend
+      - spammer
     depends_on:
       - php
     volumes:
@@ -30,10 +30,10 @@ services:
 
   mysql:
     image: mysql:8.0.17
-    container_name: mailing_backend_mysql
+    container_name: spammer_mysql
     restart: unless-stopped
     networks:
-      - mailing_backend
+      - spammer
     volumes:
       - ./MySQL/data:/var/lib/mysql
     env_file:
@@ -43,16 +43,16 @@ services:
 
   php:
     <<: *php
-    container_name: mailing_backend_php
+    container_name: spammer_php
 
   worker:
     <<: *php
-    container_name: mailing_backend_worker
-    command: ./bin/mailing-worker
+    container_name: spammer_worker
+    command: ./mailing-worker.sh
     restart: always
 
 networks:
-  mailing_backend:
+  spammer:
     driver: "bridge"
     driver_opts:
       com.docker.network.driver.mtu: 1400

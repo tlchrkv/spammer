@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\MySQL\Repositories;
+namespace SpammerApi\Infrastructure\MySQL\Repositories;
 
-use App\Domain\Subscriber;
-use App\Domain\SubscriberStorage;
+use SpammerApi\Domain\Subscriber;
+use SpammerApi\Domain\SubscriberStorage;
+use SpammerApi\Infrastructure\MySQL\MySQL;
 
 final class SubscriberRepository implements SubscriberStorage
 {
+    public function __construct(private readonly MySQL $mysql) {}
+
     public function phoneExists(string $phone): bool
     {
         // TODO: Implement phoneExists() method.
@@ -16,7 +19,7 @@ final class SubscriberRepository implements SubscriberStorage
 
     public function create(Subscriber $subscriber): void
     {
-        // TODO: Implement create() method.
+        $this->mysql->exec("INSERT INTO subscribers (id, name, phone) VALUES ('$subscriber->id', '$subscriber->name', '$subscriber->phone')");
     }
 
     public function find(string $id): Subscriber
@@ -24,8 +27,8 @@ final class SubscriberRepository implements SubscriberStorage
         // TODO: Implement find() method.
     }
 
-    public function get(int $offset, int $length): array
+    public function get(int $offset, ?int $length): array
     {
-        // TODO: Implement get() method.
+        return [];
     }
 }

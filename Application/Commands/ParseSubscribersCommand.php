@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Commands;
+namespace SpammerApi\Application\Commands;
 
-use App\Domain\SubscriberResource;
-use App\Domain\SubscriberStorage;
+use SpammerApi\Domain\SubscriberResource;
+use SpammerApi\Domain\SubscriberStorage;
 
 final class ParseSubscribersCommand
 {

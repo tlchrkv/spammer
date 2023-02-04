@@ -2,4 +2,6 @@
 
 declare(strict_types=1);
 
-spl_autoload_register(fn (string $className) => require __DIR__ . '/' . str_replace('App', 'app', str_replace('\\', '/', $className)) . '.php');
+spl_autoload_register(function (string $className) {
+    require str_replace('SpammerApi/', '', str_replace('\\', '/', $className)) . '.php';
+});

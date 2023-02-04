@@ -1,4 +1,3 @@
-#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
@@ -8,9 +7,10 @@ require_once __DIR__ . '/Infrastructure/initialize.php';
 header('Content-Type: application/json');
 
 try {
-    foreach (require_once __DIR__ . '/routes.php' as $route) {
+    foreach (require_once __DIR__ . '/Infrastructure/Http/routes.php' as $route) {
         if ($route->isCurrentRoute()) {
             $route->exec();
+            return;
         }
     }
 
@@ -24,7 +24,7 @@ try {
 /*
  * TODO:
  *
- * 1. add migrations, fill repositories, and migration command
+ * 1. fill repositories
  * 2. create subscriber parser: add csv file, parse command (generator), test
  * 4. add mailing, and mailing-worker (exec, saving pid, check start-stop) commands
  *

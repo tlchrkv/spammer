@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\SubscriberResource;
+namespace SpammerApi\Infrastructure\SubscriberResource;
 
-use App\Domain\Subscriber;
-use App\Domain\SubscriberResource;
+use SpammerApi\Domain\Subscriber;
+use SpammerApi\Domain\SubscriberResource;
 
 final class SubscriberCsvResource implements SubscriberResource
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain;
+namespace SpammerApi\Domain;
 
 final class Subscriber
 {

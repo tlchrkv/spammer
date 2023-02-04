@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Commands;
+namespace SpammerApi\Application\Commands;
 
-use App\Domain\Mailing\MailingStorage;
+use SpammerApi\Domain\Mailing\MailingStorage;
 
 final class StartMailingCommand
 {

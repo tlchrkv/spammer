@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 return [
-    \App\Domain\SubscriberResource::class => \App\Infrastructure\SubscriberResource\SubscriberCsvResource::class,
-    \App\Domain\SubscriberStorage::class => \App\Infrastructure\MySQL\Repositories\SubscriberRepository::class,
-    \App\Domain\Mailing\MailingStorage::class => \App\Infrastructure\MySQL\Repositories\MailingRepository::class,
-    \App\Domain\Mailing\SubscriberMessage\MessageSender::class => \App\Infrastructure\SmsSender\SmsSenderStub::class,
-    \App\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage::class => \App\Infrastructure\MySQL\Repositories\SubscriberMessageRepository::class,
+    \SpammerApi\Domain\SubscriberResource::class => \SpammerApi\Infrastructure\SubscriberResource\SubscriberCsvResource::class,
+    \SpammerApi\Domain\SubscriberStorage::class => \SpammerApi\Infrastructure\MySQL\Repositories\SubscriberRepository::class,
+    \SpammerApi\Domain\Mailing\MailingStorage::class => \SpammerApi\Infrastructure\MySQL\Repositories\MailingRepository::class,
+    \SpammerApi\Domain\Mailing\SubscriberMessage\MessageSender::class => \SpammerApi\Infrastructure\SmsSender\SmsSenderStub::class,
+    \SpammerApi\Domain\Mailing\SubscriberMessage\SubscriberMessageStorage::class => \SpammerApi\Infrastructure\MySQL\Repositories\SubscriberMessageRepository::class,
 ];
