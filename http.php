@@ -25,7 +25,6 @@ try {
  * TODO:
  *
  * 1. fill repositories SQL
- * 2. create subscriber parser: add csv file, parse command (generator), test
  * 4. add mailing, and mailing-worker (exec, saving pid, check start-stop) commands
  *
  */
