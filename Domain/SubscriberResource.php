@@ -6,5 +6,5 @@ namespace SpammerApi\Domain;
 
 interface SubscriberResource
 {
-    public function getNextSubscriberOrNull(): ?Subscriber;
+    public function getSubscribers(string $resourcePath): ?iterable;
 }

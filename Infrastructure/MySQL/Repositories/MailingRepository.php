@@ -29,6 +29,6 @@ final class MailingRepository implements MailingStorage
 
     public function get(): array
     {
-        // TODO: Implement get() method.
+        return [];
     }
 }

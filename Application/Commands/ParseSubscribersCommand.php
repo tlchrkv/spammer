@@ -14,15 +14,9 @@ final class ParseSubscribersCommand
         private readonly SubscriberResource $subscriberResource
     ) {}
 
-    public function __invoke(): void
+    public function __invoke(string $resourcePath): void
     {
-        while (true) {
-            $subscriber = $this->subscriberResource->getNextSubscriberOrNull();
-
-            if ($subscriber === null) {
-                return;
-            }
-
+        foreach ($this->subscriberResource->getSubscribers($resourcePath) as $subscriber) {
             if (!$this->subscriberStorage->phoneExists($subscriber->phone)) {
                 $this->subscriberStorage->create($subscriber);
             }

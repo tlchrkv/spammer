@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * @throws ReflectionException
  */
-function instance(string $class): object {
+function instance(string $class) {
     $bindings = require_once __DIR__ . '/../bindings.php';
 
     $reflector = new \ReflectionClass($class);

@@ -9,8 +9,16 @@ use SpammerApi\Domain\SubscriberResource;
 
 final class SubscriberCsvResource implements SubscriberResource
 {
-    public function getNextSubscriberOrNull(): ?Subscriber
+    public function getSubscribers(string $resourcePath): ?\Generator
     {
-        // TODO: Implement getNextSubscriberOrNull() method.
+        $stream = fopen($resourcePath, 'r');
+
+        while (($data = fgetcsv($stream)) !== false) {
+            yield new Subscriber(uuid4(), $data[1], $data[0]);
+        }
+
+        fclose($stream);
+
+        return null;
     }
 }
